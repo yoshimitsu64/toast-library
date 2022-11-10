@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "prop-types": "^15.8.1",
+    "react-bootstrap-icons": "^1.9.1",
+    "react-uuid": "^2.0.0",
     "styled-components": "^5.3.6"
   },
   "scripts": {

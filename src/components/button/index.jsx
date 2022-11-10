@@ -1,10 +1,9 @@
 import { toast } from "../../utils/toastService";
-
 import { StyledButton } from "./styled";
 
 function Button({ backgroundColor }) {
   const handleClick = () => {
-    toast.info("Info toast example");
+    toast.success("Success toast example");
   };
 
   return (

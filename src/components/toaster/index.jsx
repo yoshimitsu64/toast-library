@@ -1,28 +1,40 @@
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { useState } from "react";
 
 import Toast from "../toast";
 
 import { toast } from "../../utils/toastService";
-
 import { getPosition } from "../../helpers";
-
-import { usePortal } from "../../hooks/usePortal";
-
 import { StyledToaster } from "./styled";
 
 function Toaster({ position = "bottom-left" }) {
-  const [state, setState] = useState();
+  const [state, setState] = useState([]);
 
-  const elem = usePortal("modal");
   toast.bindSetToasts(setState);
   const positionProp = getPosition(position);
+  const elem = document.getElementById("modal");
+  console.log(state);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (state?.length > 0) {
+        toast.removeToast(state[state?.length - 1].id);
+      }
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, [state]);
 
   return ReactDOM.createPortal(
-    <StyledToaster className="Toaster" position={positionProp}>
-      {state?.map((item) => {
-        return <Toast {...item} key={item.id} position={positionProp} />;
-      })}
+    <StyledToaster position={positionProp}>
+      {state?.map((item) => (
+        <Toast
+          key={item.id}
+          id={item.id}
+          variant={item.variant}
+          message={item.message}
+          position={positionProp}
+        />
+      ))}
     </StyledToaster>,
     elem,
   );

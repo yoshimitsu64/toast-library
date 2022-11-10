@@ -8,13 +8,14 @@ export class ToastService {
     this.setToasts = null;
     this.toasts = [];
     ToastService.instance = this;
+    this.timeout = null;
   }
 
   addToast(toast) {
     if (this.toasts.length < 3) {
+      this.setToasts([...this.toasts, toast]);
       this.toasts.push(toast);
-      this.setToasts([...this.toasts]);
-      this.removeToastAfterTimeout();
+      console.log(this.timeout);
     }
   }
 
@@ -38,11 +39,13 @@ export class ToastService {
     this.addToast({ message: message, variant: "info", id: uuid() });
   }
 
-  removeToastAfterTimeout() {
-    setTimeout(() => {
-      this.toasts.pop();
-      this.setToasts([...this.toasts]);
-    }, 3000);
+  removeToast(id) {
+    this.toasts = this.toasts.filter((item) => item.id !== id);
+    this.setToasts([...this.toasts]);
+  }
+
+  getAllToasts() {
+    return this.toasts;
   }
 }
 
