@@ -5,4 +5,6 @@ export const StyledToaster = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   position: fixed;
+  ${({ position }) => position.vertical};
+  ${({ position }) => position.horizontal};
 `;

@@ -1,28 +1,27 @@
 import ReactDOM from "react-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Toast from "../toast";
 
-import { StyledToaster } from "./styled";
 import { toast } from "../../utils/toastService";
 
-function Toaster() {
-  const modalRoot = document.getElementById("modal");
-  let elem = document.createElement("div");
-  useEffect(() => {
-    modalRoot.appendChild(elem);
-    return () => {
-      modalRoot.removeChild(elem);
-    };
-  });
+import { getPosition } from "../../helpers";
 
+import { usePortal } from "../../hooks/usePortal";
+
+import { StyledToaster } from "./styled";
+
+function Toaster({ position = "bottom-left" }) {
   const [state, setState] = useState();
-  toast.setSetToasts(setState);
+
+  const elem = usePortal("modal");
+  toast.bindSetToasts(setState);
+  const positionProp = getPosition(position);
 
   return ReactDOM.createPortal(
-    <StyledToaster className="Toaster">
+    <StyledToaster className="Toaster" position={positionProp}>
       {state?.map((item) => {
-        return <Toast {...item} key={item.id} />;
+        return <Toast {...item} key={item.id} position={positionProp} />;
       })}
     </StyledToaster>,
     elem,
