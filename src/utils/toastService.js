@@ -18,7 +18,7 @@ export class ToastService {
     }
   }
 
-  setSetToasts(setToasts) {
+  bindSetToasts(setToasts) {
     this.setToasts = setToasts;
   }
 

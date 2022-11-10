@@ -7,4 +7,5 @@ export const StyledButton = styled.button`
   transition: all 0.5s;
   background-color: ${(props) => props.backgroundColor};
   color: white;
+  z-index: 999;
 `;
