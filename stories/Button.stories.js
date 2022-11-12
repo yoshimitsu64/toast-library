@@ -1,30 +1,28 @@
 import PropTypes from "prop-types";
 
 import Button from "../src/components/button";
+import Toaster from "../src/components/toaster";
 
 export default {
   title: "Button",
-  component: Button,
+  component: Toaster,
   argTypes: { handleClick: { action: 'clicked' } },
-  // argTypes: {
-  //   variant: {
-  //     types: "string",
-  //     description: "Type of notification",
-  //     defaultValue: "success",
-  //     options: ["success", "error", "info", "warning"],
-  //     control: {
-  //       type: "radio",
-  //     },
-  //   },
-  // },
 };
 
-const Template = (args) => <Button {...args} />;
+export const BaseStory = () => (
+  <>
+    <Toaster position="bottom-left"/>
+    <Button />
+  </>
+)
 
-export const BlackButton = Template.bind({});
-BlackButton.args = {
-  backgroundColor: "black",
-};
+// const Template = (args) => <Button {...args} />;
+
+// export const BlackButton = Template.bind({});
+// BlackButton.args = {
+//   backgroundColor: "black",
+// };
+
 
 // export const Error = Template.bind({});
 // Error.args = {

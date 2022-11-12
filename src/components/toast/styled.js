@@ -1,6 +1,33 @@
 import styled, { keyframes } from "styled-components";
 
-const fadeIn = keyframes`
+const leftRight = keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
+const rightLeft = keyframes`
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
+const upDown = keyframes`
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+`;
+
+const downUp = keyframes`
   from {
     transform: translateY(100%);
   }
@@ -9,7 +36,16 @@ const fadeIn = keyframes`
   }
 `;
 
-const fadeOut = keyframes`
+const downUpHide = keyframes`
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+`;
+
+const leftRightHide = keyframes`
   from {
     transform: translateX(0);
   }
@@ -18,7 +54,35 @@ const fadeOut = keyframes`
   }
 `;
 
+const rightLeftHide = keyframes`
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+`;
+
+const upDownHide = keyframes`
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+`;
+
+const asd = keyframes`
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-100px);
+  }
+`;
+
 export const StyledNotification = styled.div`
+  animation: ${asd} 1s linear infinite;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,12 +96,35 @@ export const StyledNotification = styled.div`
   color: ${({ theme }) => theme.color};
   position: relative;
   margin-top: ${({ space }) => space.space?.marginTop[0]}px;
-  animation: 0.7s ${fadeIn};
+  &[data-animation="left-right"] {
+    animation: 0.7s ${leftRight};
+  }
+  &[data-animation="right-left"] {
+    animation: 0.7s ${rightLeft};
+  }
+  &[data-animation="up-down"] {
+    animation: 0.7s ${upDown};
+  }
+  &[data-animation="down-up"] {
+    animation: 0.7s ${downUp};
+  }
   & > :first-child {
     margin-right: ${({ space }) => space.space?.marginRight[5]}px;
   }
   &.close {
-    animation: 0.5s ${fadeOut};
+    &[data-animation="left-right"] {
+      animation: 0.7s ${leftRightHide};
+    }
+    &[data-animation="right-left"] {
+      animation: 0.7s ${rightLeftHide};
+    }
+    &[data-animation="up-down"] {
+      animation: 0.7s ${upDownHide};
+    }
+    &[data-animation="down-up"] {
+      animation: 0.7s ${downUpHide};
+    }
+    transition: all 2s;
   }
 `;
 
