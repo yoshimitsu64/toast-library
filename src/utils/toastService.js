@@ -15,7 +15,6 @@ export class ToastService {
     if (this.toasts.length < 3) {
       this.setToasts([...this.toasts, toast]);
       this.toasts.push(toast);
-      console.log(this.timeout);
     }
   }
 

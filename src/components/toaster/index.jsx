@@ -1,28 +1,21 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
+import PropTypes from "prop-types";
+
 import Toast from "../toast";
 
 import { toast } from "../../utils/toastService";
 import { getPosition } from "../../helpers";
 import { StyledToaster } from "./styled";
 
-function Toaster({ position = "bottom-left" }) {
+function Toaster({ position = "bottom-left", duration, animation }) {
   const [state, setState] = useState([]);
 
-  toast.bindSetToasts(setState);
   const positionProp = getPosition(position);
   const elem = document.getElementById("modal");
-  console.log(state);
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (state?.length > 0) {
-        toast.removeToast(state[state?.length - 1].id);
-      }
-    }, 3000);
 
-    return () => clearInterval(timer);
-  }, [state]);
+  toast.bindSetToasts(setState);
 
   return ReactDOM.createPortal(
     <StyledToaster position={positionProp}>
@@ -33,11 +26,24 @@ function Toaster({ position = "bottom-left" }) {
           variant={item.variant}
           message={item.message}
           position={positionProp}
+          animation={animation}
+          duration={duration}
         />
       ))}
     </StyledToaster>,
     elem,
   );
 }
+const propTypes = {
+  position: PropTypes.oneOf([
+    "top-left",
+    "top-center",
+    "top-right",
+    "bottom-left",
+    "bottom-center",
+    "bottom-right",
+  ]),
+  animation: PropTypes.oneOf(["left-right", "right-left", "up-down", "down-up"]),
+};
 
 export default Toaster;
