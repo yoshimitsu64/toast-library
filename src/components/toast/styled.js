@@ -1,130 +1,75 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
-const leftRight = keyframes`
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-`;
-
-const rightLeft = keyframes`
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-`;
-
-const upDown = keyframes`
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-`;
-
-const downUp = keyframes`
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-`;
-
-const downUpHide = keyframes`
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(100%);
-  }
-`;
-
-const leftRightHide = keyframes`
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-`;
-
-const rightLeftHide = keyframes`
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(100%);
-  }
-`;
-
-const upDownHide = keyframes`
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-100%);
-  }
-`;
-
-const asd = keyframes`
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-100px);
-  }
-`;
+import * as smooth from "../animation/smooth";
+import * as bounce from "../animation/bounce";
 
 export const StyledNotification = styled.div`
-  animation: ${asd} 1s linear infinite;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: ${({ theme }) => theme.backgroundColor};
+  background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: 10px;
-  min-width: 200px;
+  width: 300px;
   min-height: 50px;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
   padding: 10px;
   justify-content: space-between;
   color: ${({ theme }) => theme.color};
   position: relative;
   margin-top: ${({ space }) => space.space?.marginTop[0]}px;
-  &[data-animation="left-right"] {
-    animation: 0.7s ${leftRight};
+  &[data-animation="left-right-smooth"] {
+    animation: 0.7s ${smooth.leftRight};
   }
-  &[data-animation="right-left"] {
-    animation: 0.7s ${rightLeft};
+  &[data-animation="right-left-smooth"] {
+    animation: 0.7s ${smooth.rightLeft};
   }
-  &[data-animation="up-down"] {
-    animation: 0.7s ${upDown};
+  &[data-animation="up-down-smooth"] {
+    animation: 0.7s ${smooth.upDown};
   }
-  &[data-animation="down-up"] {
-    animation: 0.7s ${downUp};
+  &[data-animation="down-up-smooth"] {
+    animation: 0.7s ${smooth.downUp};
+  }
+  &[data-animation="left-right-bounce"] {
+    animation: 0.7s ${bounce.leftRight};
+  }
+  &[data-animation="right-left-bounce"] {
+    animation: 0.7s ${bounce.rightLeft};
+  }
+  &[data-animation="up-down-bounce"] {
+    animation: 0.7s ${bounce.upDown};
+  }
+  &[data-animation="down-up-bounce"] {
+    animation: 0.7s ${bounce.downUp};
+  }
+  &.close {
+    &[data-animation="left-right-smooth"] {
+      animation: 0.7s ${bounce.leftRightHide};
+    }
+    &[data-animation="right-left-smooth"] {
+      animation: 0.7s ${bounce.rightLeftHide};
+    }
+    &[data-animation="up-down-smooth"] {
+      animation: 0.7s ${bounce.upDownHide};
+    }
+    &[data-animation="down-up-smooth"] {
+      animation: 0.7s ${bounce.downUpHide};
+    }
+    &[data-animation="left-right-bounce"] {
+      animation: 0.7s ${bounce.leftRightHide};
+    }
+    &[data-animation="right-left-bounce"] {
+      animation: 0.7s ${bounce.rightLeftHide};
+    }
+    &[data-animation="up-down-bounce"] {
+      animation: 0.7s ${bounce.upDownHide};
+    }
+    &[data-animation="down-up-bounce"] {
+      animation: 0.7s ${bounce.downUpHide};
+    }
+    transition: all 2s;
   }
   & > :first-child {
     margin-right: ${({ space }) => space.space?.marginRight[5]}px;
-  }
-  &.close {
-    &[data-animation="left-right"] {
-      animation: 0.7s ${leftRightHide};
-    }
-    &[data-animation="right-left"] {
-      animation: 0.7s ${rightLeftHide};
-    }
-    &[data-animation="up-down"] {
-      animation: 0.7s ${upDownHide};
-    }
-    &[data-animation="down-up"] {
-      animation: 0.7s ${downUpHide};
-    }
-    transition: all 2s;
   }
 `;
 

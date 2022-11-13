@@ -8,7 +8,6 @@ export class ToastService {
     this.setToasts = null;
     this.toasts = [];
     ToastService.instance = this;
-    this.timeout = null;
   }
 
   addToast(toast) {

@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
 export const StyledButton = styled.button`
-  width: 200px;
-  height: 200px;
+  width: 130px;
+  height: 60px;
+  border: none;
   border-radius: 10px;
   transition: all 0.5s;
-  background-color: ${(props) => props.backgroundColor};
+  &:active {
+    transform: scale(0.87);
+  }
+  background-color: #000000;
   color: white;
-  z-index: 999;
 `;
