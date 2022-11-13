@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useState } from "react";
 import ReactDOM from "react-dom";
 
 import PropTypes from "prop-types";
@@ -9,7 +9,12 @@ import { toast } from "../../utils/toastService";
 import { getPosition } from "../../helpers";
 import { StyledToaster } from "./styled";
 
-function Toaster({ position = "bottom-left", duration, animation }) {
+function Toaster({
+  position = "bottom-left",
+  duration = 3,
+  animation = "smooth",
+  backgroundColor,
+}) {
   const [state, setState] = useState([]);
 
   const positionProp = getPosition(position);
@@ -25,16 +30,17 @@ function Toaster({ position = "bottom-left", duration, animation }) {
           id={item.id}
           variant={item.variant}
           message={item.message}
-          position={positionProp}
+          position={position}
           animation={animation}
           duration={duration}
+          backgroundColor={backgroundColor}
         />
       ))}
     </StyledToaster>,
     elem,
   );
 }
-const propTypes = {
+Toaster.propTypes = {
   position: PropTypes.oneOf([
     "top-left",
     "top-center",
@@ -46,4 +52,4 @@ const propTypes = {
   animation: PropTypes.oneOf(["left-right", "right-left", "up-down", "down-up"]),
 };
 
-export default Toaster;
+export default memo(Toaster);
