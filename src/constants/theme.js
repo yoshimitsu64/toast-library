@@ -19,7 +19,6 @@ export const theme = {
       backgroundColor: "#e63946",
       color: "#FFFFFF",
       icon: <Bug size={30}/>
-
     },
     warning: {
       backgroundColor: "#ffbd00",
