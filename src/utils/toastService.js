@@ -1,4 +1,4 @@
-import uuid from "react-uuid";
+import uuid from 'react-uuid';
 
 export class ToastService {
   constructor() {
@@ -7,13 +7,16 @@ export class ToastService {
     }
     this.setToasts = null;
     this.toasts = [];
+    this.options = null;
     ToastService.instance = this;
   }
 
   addToast(toast) {
     if (this.toasts.length < 3) {
-      this.setToasts([...this.toasts, toast]);
-      this.toasts.push(toast);
+      const asd = { ...this.options, ...toast };
+      console.log(asd);
+      this.setToasts([...this.toasts, asd]);
+      this.toasts.push(asd);
     }
   }
 
@@ -21,25 +24,29 @@ export class ToastService {
     this.setToasts = setToasts;
   }
 
-  success(message) {
-    this.addToast({ message: message, variant: "success", id: uuid() });
+  success(message, options) {
+    this.addToast({ message: message, variant: 'success', id: uuid(), ...options });
   }
 
   error(message) {
-    this.addToast({ message: message, variant: "error", id: uuid() });
+    this.addToast({ message: message, variant: 'error', id: uuid() });
   }
 
   warning(message) {
-    this.addToast({ message: message, variant: "warning", id: uuid() });
+    this.addToast({ message: message, variant: 'warning', id: uuid() });
   }
 
   info(message) {
-    this.addToast({ message: message, variant: "info", id: uuid() });
+    this.addToast({ message: message, variant: 'info', id: uuid() });
   }
 
   removeToast(id) {
     this.toasts = this.toasts.filter((item) => item.id !== id);
     this.setToasts([...this.toasts]);
+  }
+
+  setOptions(options) {
+    this.options = options;
   }
 
   getAllToasts() {

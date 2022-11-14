@@ -1,9 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import * as smooth from "../animation/smooth";
-import * as bounce from "../animation/bounce";
+import * as smooth from '../animation/smooth';
+import * as bounce from '../animation/bounce';
 
 export const StyledNotification = styled.div`
+  pointer-events: all;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,53 +18,53 @@ export const StyledNotification = styled.div`
   color: ${({ theme }) => theme.color};
   position: relative;
   margin-top: ${({ space }) => space.space?.marginTop[0]}px;
-  &[data-animation="left-right-smooth"] {
+  &[data-animation='left-right-smooth'] {
     animation: 0.7s ${smooth.leftRight};
   }
-  &[data-animation="right-left-smooth"] {
+  &[data-animation='right-left-smooth'] {
     animation: 0.7s ${smooth.rightLeft};
   }
-  &[data-animation="up-down-smooth"] {
+  &[data-animation='up-down-smooth'] {
     animation: 0.7s ${smooth.upDown};
   }
-  &[data-animation="down-up-smooth"] {
+  &[data-animation='down-up-smooth'] {
     animation: 0.7s ${smooth.downUp};
   }
-  &[data-animation="left-right-bounce"] {
+  &[data-animation='left-right-bounce'] {
     animation: 0.7s ${bounce.leftRight};
   }
-  &[data-animation="right-left-bounce"] {
+  &[data-animation='right-left-bounce'] {
     animation: 0.7s ${bounce.rightLeft};
   }
-  &[data-animation="up-down-bounce"] {
+  &[data-animation='up-down-bounce'] {
     animation: 0.7s ${bounce.upDown};
   }
-  &[data-animation="down-up-bounce"] {
+  &[data-animation='down-up-bounce'] {
     animation: 0.7s ${bounce.downUp};
   }
   &.close {
-    &[data-animation="left-right-smooth"] {
+    &[data-animation='left-right-smooth'] {
       animation: 0.7s ${bounce.leftRightHide};
     }
-    &[data-animation="right-left-smooth"] {
+    &[data-animation='right-left-smooth'] {
       animation: 0.7s ${bounce.rightLeftHide};
     }
-    &[data-animation="up-down-smooth"] {
+    &[data-animation='up-down-smooth'] {
       animation: 0.7s ${bounce.upDownHide};
     }
-    &[data-animation="down-up-smooth"] {
+    &[data-animation='down-up-smooth'] {
       animation: 0.7s ${bounce.downUpHide};
     }
-    &[data-animation="left-right-bounce"] {
+    &[data-animation='left-right-bounce'] {
       animation: 0.7s ${bounce.leftRightHide};
     }
-    &[data-animation="right-left-bounce"] {
+    &[data-animation='right-left-bounce'] {
       animation: 0.7s ${bounce.rightLeftHide};
     }
-    &[data-animation="up-down-bounce"] {
+    &[data-animation='up-down-bounce'] {
       animation: 0.7s ${bounce.upDownHide};
     }
-    &[data-animation="down-up-bounce"] {
+    &[data-animation='down-up-bounce'] {
       animation: 0.7s ${bounce.downUpHide};
     }
     transition: all 2s;

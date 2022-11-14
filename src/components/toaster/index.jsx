@@ -1,55 +1,81 @@
-import React, { memo, useState } from "react";
-import ReactDOM from "react-dom";
+import React, { memo, useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import Toast from "../toast";
+import Toast from '../toast';
 
-import { toast } from "../../utils/toastService";
-import { getPosition } from "../../helpers";
-import { StyledToaster } from "./styled";
+import { toast } from '../../utils/toastService';
+import { getPosition } from '../../helpers';
+import { StyledToaster } from './styled';
+import ToastSlots from '../slots';
 
-function Toaster({
-  position = "bottom-left",
-  duration = 3,
-  animation = "smooth",
-  backgroundColor,
-}) {
+function Toaster({ position, duration, animation, backgroundColor }) {
   const [state, setState] = useState([]);
 
-  const positionProp = getPosition(position);
-  const elem = document.getElementById("modal");
+  const obj = {
+    position: position,
+    duration: duration,
+    animation: animation,
+    backgroundColor: backgroundColor,
+    ...state[state.length - 1],
+  };
 
-  toast.bindSetToasts(setState);
+  const positionProp = getPosition(position);
+  const elem = document.getElementById('modal');
+
+  useEffect(() => {
+    toast.bindSetToasts(setState);
+    toast.setOptions(obj);
+  }, []);
+
+  const POSITIONS = [
+    'top-left',
+    'top-center',
+    'top-right',
+    'bottom-left',
+    'bottom-center',
+    'bottom-right',
+  ];
+
+  const positions = POSITIONS.map((position) => {
+    return [...state].filter((toast) => {
+      if (toast.position === position) {
+        return true;
+      }
+    });
+  });
 
   return ReactDOM.createPortal(
-    <StyledToaster position={positionProp}>
-      {state?.map((item) => (
-        <Toast
-          key={item.id}
-          id={item.id}
-          variant={item.variant}
-          message={item.message}
-          position={position}
-          animation={animation}
-          duration={duration}
-          backgroundColor={backgroundColor}
-        />
-      ))}
+    <StyledToaster>
+      {positions.map((toastList) => {
+        if (toastList?.length > 0) {
+          return <ToastSlots toastList={toastList} />;
+        }
+      })}
     </StyledToaster>,
     elem,
   );
 }
+
 Toaster.propTypes = {
   position: PropTypes.oneOf([
-    "top-left",
-    "top-center",
-    "top-right",
-    "bottom-left",
-    "bottom-center",
-    "bottom-right",
+    'top-left',
+    'top-center',
+    'top-right',
+    'bottom-left',
+    'bottom-center',
+    'bottom-right',
   ]),
-  animation: PropTypes.oneOf(["left-right", "right-left", "up-down", "down-up"]),
+  duration: PropTypes.string,
+  animation: PropTypes.oneOf(['smooth', 'bounce']),
+  backgroundColor: PropTypes.string,
+};
+
+Toaster.defaultProps = {
+  position: 'bottom-left',
+  duration: 3,
+  animation: 'smooth',
 };
 
 export default memo(Toaster);

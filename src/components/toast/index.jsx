@@ -1,27 +1,19 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useState } from 'react';
+import { ThemeProvider } from 'styled-components';
 
-import { ThemeProvider } from "styled-components";
+import { theme } from '../../constants/theme';
+import { toast } from '../../utils/toastService';
+import { StyledCross, StyledNotification, StyledToastContent } from './styled';
+import { setAnimation } from '../../helpers';
 
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import { theme } from "../../constants/theme";
-import { toast } from "../../utils/toastService";
-import { StyledCross, StyledNotification, StyledToastContent } from "./styled";
-import { setAnimation } from "../../helpers";
-
-function Toast({
-  message,
-  variant,
-  id,
-  position,
-  duration,
-  animation = "right-left",
-  backgroundColor = theme.notifications[variant].backgroundColor,
-}) {
+function Toast({ message, variant, id, position, duration, animation, backgroundColor }) {
   const [closed, setClosed] = useState(false);
 
   const notificationVariant = theme.notifications[variant];
   const animationType = setAnimation(position, animation);
+  const defaultBackGroundColor = theme.notifications[variant].backgroundColor;
 
   const handleClose = () => {
     setClosed(true);
@@ -30,7 +22,7 @@ function Toast({
   useEffect(() => {
     const timer = setInterval(() => {
       setClosed(true);
-    }, duration * 1000);
+    }, 500000);
 
     return () => clearInterval(timer);
   }, []);
@@ -47,8 +39,8 @@ function Toast({
     <ThemeProvider theme={notificationVariant}>
       <StyledNotification
         onAnimationEnd={() => closed && toast.removeToast(id)}
-        backgroundColor={backgroundColor}
-        className={closed && "close"}
+        backgroundColor={defaultBackGroundColor}
+        className={closed && 'close'}
         data-animation={animationType}
         position={position}
         space={theme}
@@ -62,5 +54,26 @@ function Toast({
     </ThemeProvider>
   );
 }
+
+Toast.propTypes = {
+  message: PropTypes.string,
+  variant: PropTypes.oneOf(['success', 'error', 'warning', 'info']),
+  id: PropTypes.string,
+  position: PropTypes.oneOf([
+    'top-left',
+    'top-center',
+    'top-right',
+    'bottom-left',
+    'bottom-center',
+    'bottom-right',
+  ]),
+  duration: PropTypes.string,
+  animation: PropTypes.oneOf(['smooth', 'bounce']),
+  backgroundColor: PropTypes.string,
+};
+
+Toast.defaultProps = {
+  message: 'Toast example',
+};
 
 export default memo(Toast);

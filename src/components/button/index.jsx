@@ -1,21 +1,27 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import { toast } from "../../utils/toastService";
-import { StyledButton } from "./styled";
+import { toast } from '../../utils/toastService';
+import { StyledButton } from './styled';
 
 function Button({ variant, message }) {
   const handleClick = () => {
     switch (variant) {
-      case "success":
-        toast.success(message);
+      case 'success':
+        toast.success('success', {
+          position: 'top-center',
+          backgroundColor: 'black',
+        });
         break;
-      case "error":
-        toast.error(message);
+      case 'error':
+        toast.error(message, {
+          position: 'bottom-center',
+          backgroundColor: 'black',
+        });
         break;
-      case "warning":
+      case 'warning':
         toast.warning(message);
         break;
-      case "info":
+      case 'info':
         toast.info(message);
         break;
       default:

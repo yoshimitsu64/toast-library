@@ -1,65 +1,65 @@
-import Button from "../src/components/button";
-import Toaster from "../src/components/toaster";
+import Button from '../src/components/button';
+import Toaster from '../src/components/toaster';
 
 export default {
-  title: "Toasts page",
+  title: 'Toasts page',
   component: Toasts,
   argTypes: {
     variant: {
-      type: "string",
-      description: "Chose toast type",
-      defaultValue: "success",
-      options: ["success", "error", "warning", "info"],
+      type: 'string',
+      description: 'Chose toast type',
+      defaultValue: 'success',
+      options: ['success', 'error', 'warning', 'info'],
       control: {
-        type: "radio",
+        type: 'radio',
       },
     },
     position: {
-      type: "string",
-      description: "Chose toast position",
-      defaultValue: "bottom-left",
+      type: 'string',
+      description: 'Chose toast position',
+      defaultValue: 'bottom-left',
       options: [
-        "top-left",
-        "top-center",
-        "top-right",
-        "bottom-left",
-        "bottom-center",
-        "bottom-right",
+        'top-left',
+        'top-center',
+        'top-right',
+        'bottom-left',
+        'bottom-center',
+        'bottom-right',
       ],
       control: {
-        type: "radio",
+        type: 'radio',
       },
     },
     animation: {
-      type: "string",
-      description: "Chose toast animation",
-      defaultValue: "smooth",
-      options: ["smooth", "bounce"],
+      type: 'string',
+      description: 'Chose toast animation',
+      defaultValue: 'smooth',
+      options: ['smooth', 'bounce'],
       control: {
-        type: "radio",
+        type: 'radio',
       },
     },
     backgroundColor: {
-      type: "string",
-      description: "Chose toast background color",
+      type: 'string',
+      description: 'Chose toast background color',
       control: {
-        type: "color",
+        type: 'color',
       },
     },
     duration: {
-      type: "number",
-      description: "Chose toast duration",
-      defaultValue: "3",
+      type: 'number',
+      description: 'Chose toast duration',
+      defaultValue: '3',
       control: {
-        type: "text",
+        type: 'text',
       },
     },
     message: {
-      type: "string",
-      description: "Write toast message",
-      defaultValue: "Toast example",
+      type: 'string',
+      description: 'Write toast message',
+      defaultValue: 'Toast example',
       control: {
-        type: "text",
+        type: 'text',
       },
     },
   },

@@ -1,0 +1,26 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "simple-import-sort"],
+  "rules": {
+    "linebreak-style": ["error", "windows"],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "no-unused-vars": "error",
+    "default-case": "error",
+    "no-console": "warn",
+    "no-redeclare": "error",
+    "no-var": "error",
+    "react/react-in-jsx-scope": "off"
+  }
+}
