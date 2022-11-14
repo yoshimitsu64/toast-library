@@ -3,43 +3,31 @@ import ReactDOM from 'react-dom';
 
 import PropTypes from 'prop-types';
 
-import Toast from '../toast';
-
-import { toast } from '../../utils/toastService';
-import { getPosition } from '../../helpers';
+import { toast } from '@utils/toastService';
+import ToastSlots from '@components/slots';
+import { positions } from '@constants/positions';
 import { StyledToaster } from './styled';
-import ToastSlots from '../slots';
 
 function Toaster({ position, duration, animation, backgroundColor }) {
-  const [state, setState] = useState([]);
+  const [toasts, setToasts] = useState([]);
 
   const obj = {
     position: position,
     duration: duration,
     animation: animation,
     backgroundColor: backgroundColor,
-    ...state[state.length - 1],
+    ...toasts[toasts.length - 1],
   };
 
-  const positionProp = getPosition(position);
   const elem = document.getElementById('modal');
 
   useEffect(() => {
-    toast.bindSetToasts(setState);
+    toast.bindSetToasts(setToasts);
     toast.setOptions(obj);
   }, []);
 
-  const POSITIONS = [
-    'top-left',
-    'top-center',
-    'top-right',
-    'bottom-left',
-    'bottom-center',
-    'bottom-right',
-  ];
-
-  const positions = POSITIONS.map((position) => {
-    return [...state].filter((toast) => {
+  const slots = positions.map((position) => {
+    return [...toasts].filter((toast) => {
       if (toast.position === position) {
         return true;
       }
@@ -48,9 +36,9 @@ function Toaster({ position, duration, animation, backgroundColor }) {
 
   return ReactDOM.createPortal(
     <StyledToaster>
-      {positions.map((toastList) => {
-        if (toastList?.length > 0) {
-          return <ToastSlots toastList={toastList} />;
+      {slots.map((slotsList) => {
+        if (slotsList?.length > 0) {
+          return <ToastSlots slotsList={slotsList} key={slotsList[0].position} />;
         }
       })}
     </StyledToaster>,

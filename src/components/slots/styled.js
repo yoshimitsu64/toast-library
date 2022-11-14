@@ -1,32 +1,31 @@
 import styled from 'styled-components';
 
-export const StyledSlot = styled.div`
+export const StyledSloatsContainer = styled.div`
   position: fixed;
-  top: 200px;
-  pointer-events: none;
   &.top-center {
-    top: ${({ index }) => index * 80}px;
-    margin-left: 50vw;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
   }
   &.top-left {
-    top: 1vh;
-    left: 0px;
+    top: 0;
+    left: 0;
   }
   &.top-right {
-    top: 1vh;
-    right: 1vw;
+    top: 0;
+    right: 0;
   }
   &.bottom-left {
-    bottom: 1vh;
-    left: 0px;
+    bottom: 0;
+    left: 0;
   }
   &.bottom-right {
-    bottom: 1vh;
-    right: 1vw;
+    bottom: 0;
+    right: 0;
   }
   &.bottom-center {
     bottom: 0px;
     left: 50%;
-    margin-left: -10rem;
+    transform: translateX(-50%);
   }
 `;

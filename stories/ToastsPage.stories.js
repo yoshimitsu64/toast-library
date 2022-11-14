@@ -1,5 +1,5 @@
-import Button from '../src/components/button';
-import Toaster from '../src/components/toaster';
+import Button from '@components/button';
+import Toaster from '@components/toaster';
 
 export default {
   title: 'Toasts page',

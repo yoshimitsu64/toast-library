@@ -5,5 +5,4 @@ export const StyledToaster = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   position: fixed;
-  pointer-events: none;
 `;

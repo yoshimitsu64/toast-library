@@ -1,4 +1,4 @@
-import Toast from '../src/components/toast';
+import Toast from '@components/toast';
 
 export default {
   title: 'Toasts',

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import * as smooth from '../animation/smooth';
-import * as bounce from '../animation/bounce';
+import * as smooth from '../../animation/smooth';
+import * as bounce from '../../animation/bounce';
 
 export const StyledNotification = styled.div`
   pointer-events: all;
@@ -44,16 +44,16 @@ export const StyledNotification = styled.div`
   }
   &.close {
     &[data-animation='left-right-smooth'] {
-      animation: 0.7s ${bounce.leftRightHide};
+      animation: 0.7s ${smooth.leftRightHide};
     }
     &[data-animation='right-left-smooth'] {
-      animation: 0.7s ${bounce.rightLeftHide};
+      animation: 0.7s ${smooth.rightLeftHide};
     }
     &[data-animation='up-down-smooth'] {
-      animation: 0.7s ${bounce.upDownHide};
+      animation: 0.7s ${smooth.upDownHide};
     }
     &[data-animation='down-up-smooth'] {
-      animation: 0.7s ${bounce.downUpHide};
+      animation: 0.7s ${smooth.downUpHide};
     }
     &[data-animation='left-right-bounce'] {
       animation: 0.7s ${bounce.leftRightHide};

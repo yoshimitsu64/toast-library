@@ -1,12 +1,12 @@
 import { memo, useEffect, useState } from 'react';
+
 import { ThemeProvider } from 'styled-components';
-
-import { theme } from '../../constants/theme';
-import { toast } from '../../utils/toastService';
-import { StyledCross, StyledNotification, StyledToastContent } from './styled';
-import { setAnimation } from '../../helpers';
-
 import PropTypes from 'prop-types';
+
+import { theme } from '@constants/theme';
+import { toast } from '@utils/toastService';
+import { StyledCross, StyledNotification, StyledToastContent } from './styled';
+import { setAnimation } from '@helpers/animation';
 
 function Toast({ message, variant, id, position, duration, animation, backgroundColor }) {
   const [closed, setClosed] = useState(false);
@@ -22,7 +22,7 @@ function Toast({ message, variant, id, position, duration, animation, background
   useEffect(() => {
     const timer = setInterval(() => {
       setClosed(true);
-    }, 500000);
+    }, duration * 1000);
 
     return () => clearInterval(timer);
   }, []);

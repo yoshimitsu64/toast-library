@@ -1,19 +1,15 @@
-import Toast from '../toast';
-import { StyledToaster } from '../toaster/styled';
-import { StyledSlot } from './styled';
+import Toast from '@components/toast';
+import { StyledSloatsContainer } from './styled';
 
-function ToastSlots({ toastList }) {
-  console.log(toastList);
+function ToastSlots({ slotsList }) {
+  const containerPosition = slotsList[0].position;
+
   return (
-    <>
-      {toastList?.map((item, index) => {
-        return (
-          <StyledSlot index={index} className={item.position} key={item.id}>
-            <Toast key={item.id} {...item} />
-          </StyledSlot>
-        );
+    <StyledSloatsContainer className={containerPosition}>
+      {slotsList?.map((item) => {
+        return <Toast key={item.id} {...item} />;
       })}
-    </>
+    </StyledSloatsContainer>
   );
 }
 
