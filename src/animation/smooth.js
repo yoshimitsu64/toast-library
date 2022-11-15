@@ -2,7 +2,7 @@ import { keyframes } from 'styled-components';
 
 export const leftRight = keyframes`
   from {
-    transform: translateX(-100%);
+    transform: translateX(-110vw);
   }
   to {
     transform: translateX(0);
@@ -11,7 +11,7 @@ export const leftRight = keyframes`
 
 export const rightLeft = keyframes`
   0%{
-    transform: translateX(100%);
+    transform: translateX(100vw);
   }
   100%{
     transform: translateX(0);
@@ -20,7 +20,7 @@ export const rightLeft = keyframes`
 
 export const upDown = keyframes`
   from {
-    transform: translateY(-100%);
+    transform: translateY(-100vh);
   }
   to {
     transform: translateY(0);
@@ -29,7 +29,7 @@ export const upDown = keyframes`
 
 export const downUp = keyframes`
   from {
-    transform: translateY(100%);
+    transform: translateY(100vh);
   }
   to {
     transform: translateY(0);
@@ -41,7 +41,7 @@ export const leftRightHide = keyframes`
     transform: translateX(0);
   }
   to {
-    transform: translateX(-100%);
+    transform: translateX(-110vw);
   }
 `;
 
@@ -50,7 +50,7 @@ export const rightLeftHide = keyframes`
     transform: translateX(0);
   }
   to {
-    transform: translateX(100%);
+    transform: translateX(110vw);
   }
 `;
 
