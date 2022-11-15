@@ -65,6 +65,30 @@ export default {
         type: 'text',
       },
     },
+    topic: {
+      type: 'string',
+      description: 'Write toast topic',
+      defaultValue: 'Toast topic',
+      control: {
+        type: 'text',
+      },
+    },
+    horizontalMargin: {
+      type: 'number',
+      description: 'Write horizontal margin',
+      defaultValue: 0,
+      control: {
+        type: 'number',
+      },
+    },
+    verticalMargin: {
+      type: 'number',
+      description: 'Write vertical margin',
+      defaultValue: 0,
+      control: {
+        type: 'number',
+      },
+    },
   },
 };
 

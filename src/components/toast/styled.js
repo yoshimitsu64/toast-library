@@ -4,21 +4,24 @@ import * as smooth from '@animation/smooth';
 import * as bounce from '@animation/bounce';
 
 export const StyledNotification = styled.div`
+  @import url('https://fonts.googleapis.com/css2?family=Anek+Latin:wght@200&display=swap');
+  font-family: 'Anek Latin', sans-serif;
   position: relative;
+  font-weight: 700;
   pointer-events: all;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: ${({ backgroundColor }) => backgroundColor};
-  border-radius: 10px;
-  width: 300px;
-  min-height: 50px;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-  padding: 10px;
+  border-radius: ${({ space }) => space.borders.borderRadius[0]}px;
+  width: ${({ space }) => space.sizes.width[1]}px;
+  min-height: ${({ space }) => space.sizes.minHeight[0]}px;
+  box-shadow: ${({ space }) => space.shadows.boxShadow[0]};
+  padding: ${({ space }) => space.space.padding[0]}px;
   justify-content: space-between;
   color: ${({ theme }) => theme.color};
-  position: relative;
   margin-top: ${({ space }) => space.space?.marginTop[0]}px;
+  ${({ horizontalMargin }) => horizontalMargin};
   &[data-animation='left-right-smooth'] {
     animation: 0.7s ${smooth.leftRight};
   }
@@ -72,21 +75,17 @@ export const StyledNotification = styled.div`
   & > :first-child {
     margin-right: ${({ space }) => space.space?.marginRight[5]}px;
   }
-  &::after {
-    content: '';
-    display: block;
-    height: 10px;
-    width: 100%;
+  &::before {
+    content: attr(data-topic);
     position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: 'white';
+    top: 4px;
   }
 `;
 
 export const StyledToastContent = styled.div`
   display: flex;
   align-items: center;
+  margin-top: ${({ space }) => space.space.marginTop[0]}px;
   font-size: ${({ space }) => space.fontSizes.fontSize[2]}px;
   & > * {
     margin-right: ${({ space }) => space.space?.marginRight[0]}px;

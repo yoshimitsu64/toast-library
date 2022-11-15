@@ -8,7 +8,18 @@ import { toast } from '@utils/toastService';
 import { setAnimation } from '@helpers/animation';
 import { StyledCross, StyledNotification, StyledToastContent } from './styled';
 
-function Toast({ message, variant, id, position, duration, animation, backgroundColor }) {
+function Toast({
+  message,
+  variant,
+  id,
+  position,
+  duration,
+  animation,
+  backgroundColor,
+  topic,
+  horizontalMargin,
+  verticalMargin,
+}) {
   const [closed, setClosed] = useState(false);
 
   const notificationVariant = theme.notifications[variant];
@@ -40,11 +51,12 @@ function Toast({ message, variant, id, position, duration, animation, background
   return (
     <ThemeProvider theme={notificationVariant}>
       <StyledNotification
-        onAnimationEnd={() => closed && toast.removeToast(id)}
-        backgroundColor={defaultBackGroundColor}
         className={closed && 'close'}
         data-animation={animationType}
-        position={position}
+        data-topic={topic}
+        onAnimationEnd={() => closed && toast.removeToast(id)}
+        backgroundColor={defaultBackGroundColor}
+        horizontalMargin={horizontalMargin}
         space={theme}
       >
         <StyledToastContent space={theme}>
@@ -69,6 +81,8 @@ Toast.propTypes = {
     'bottom-center',
     'bottom-right',
   ]),
+  horizontalMargin: PropTypes.object,
+  verticalMargin: PropTypes.object,
   duration: PropTypes.string,
   animation: PropTypes.oneOf(['smooth', 'bounce']),
   backgroundColor: PropTypes.string,
@@ -76,6 +90,9 @@ Toast.propTypes = {
 
 Toast.defaultProps = {
   message: 'Toast example',
+  topic: 'Toast topic',
+  horizontalMargin: 0,
+  verticalMargin: 0,
 };
 
 export default memo(Toast);

@@ -1,13 +1,11 @@
 import React, { memo, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import PropTypes from 'prop-types';
-
 import { toast } from '@utils/toastService';
 import ToastSlots from '@components/slots';
 import { positions } from '@constants/positions';
-import { StyledToaster } from './styled';
 import ErrorBoundary from '@containers/errorBoundary';
+import { StyledToaster } from './styled';
 
 function Toaster() {
   const [toasts, setToasts] = useState([]);
@@ -29,7 +27,7 @@ function Toaster() {
   return ReactDOM.createPortal(
     <ErrorBoundary>
       <StyledToaster>
-        {slots.map((slotsList) => {
+        {slots.map((slotsList, index) => {
           if (slotsList?.length > 0) {
             return <ToastSlots slotsList={slotsList} key={slotsList[0].position} />;
           }

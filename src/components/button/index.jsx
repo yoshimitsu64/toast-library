@@ -3,14 +3,27 @@ import PropTypes from 'prop-types';
 import { toast } from '@utils/toastService';
 import { StyledButton } from './styled';
 
-function Button({ position, duration, animation, variant, message, backgroundColor }) {
+function Button({
+  position,
+  duration,
+  animation,
+  variant,
+  message,
+  backgroundColor,
+  topic,
+  horizontalMargin,
+  verticalMargin,
+}) {
   const options = {
-    position: position,
-    duration: duration,
-    animation: animation,
-    variant: variant,
-    message: message,
-    backgroundColor: backgroundColor,
+    position,
+    duration,
+    animation,
+    variant,
+    message,
+    backgroundColor,
+    topic,
+    horizontalMargin,
+    verticalMargin,
   };
 
   const handleClick = () => {
@@ -50,9 +63,11 @@ Button.propTypes = {
   backgroundColor: PropTypes.string,
   variant: PropTypes.oneOf(['success', 'error', 'warning', 'info']),
   message: PropTypes.string,
+  topic: PropTypes.string,
 };
 
 Button.defaultProps = {
+  topic: 'Toast topic',
   message: 'Toast example',
   position: 'bottom-left',
   animation: 'smooth',

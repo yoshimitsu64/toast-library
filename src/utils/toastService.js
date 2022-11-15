@@ -1,4 +1,5 @@
 import uuid from 'react-uuid';
+import { getMargin } from '../helpers/toast';
 
 export class ToastService {
   constructor() {
@@ -14,8 +15,14 @@ export class ToastService {
   addToast(toast) {
     if (this.toasts.length < 3) {
       const mergedOptions = { ...this.options, ...toast };
-      this.setToasts([...this.toasts, mergedOptions]);
-      this.toasts.push(mergedOptions);
+      const margin = getMargin(
+        mergedOptions.position,
+        mergedOptions?.horizontalMargin,
+        mergedOptions?.verticalMargin,
+      );
+      const toastOptions = { ...mergedOptions, ...margin };
+      this.setToasts([...this.toasts, toastOptions]);
+      this.toasts.push(toastOptions);
     }
   }
 
@@ -46,10 +53,6 @@ export class ToastService {
 
   setOptions(options) {
     this.options = options;
-  }
-
-  getAllToasts() {
-    return this.toasts;
   }
 }
 
