@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
-import * as smooth from '../../animation/smooth';
-import * as bounce from '../../animation/bounce';
+import * as smooth from '@animation/smooth';
+import * as bounce from '@animation/bounce';
 
 export const StyledNotification = styled.div`
+  position: relative;
   pointer-events: all;
   display: flex;
   justify-content: space-between;
@@ -67,10 +68,19 @@ export const StyledNotification = styled.div`
     &[data-animation='down-up-bounce'] {
       animation: 0.7s ${bounce.downUpHide};
     }
-    transition: all 2s;
   }
   & > :first-child {
     margin-right: ${({ space }) => space.space?.marginRight[5]}px;
+  }
+  &::after {
+    content: '';
+    display: block;
+    height: 10px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: 'white';
   }
 `;
 

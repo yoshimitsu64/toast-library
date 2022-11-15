@@ -68,6 +68,6 @@ export const downUpHide = keyframes`
     transform: translateY(0);
   }
   to {
-    transform: translateY(200vh);
+    transform: translateY(120vh);
   }
 `;

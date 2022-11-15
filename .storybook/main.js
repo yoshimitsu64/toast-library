@@ -15,6 +15,7 @@ module.exports = {
       '@helpers': path.resolve(__dirname, '../', 'src/helpers'),
       '@utils': path.resolve(__dirname, '../', 'src/utils'),
       '@animation': path.resolve(__dirname, '../', 'src/animation'),
+      '@containers': path.resolve(__dirname, '../', 'src/containers'),
     };
 
     return config;

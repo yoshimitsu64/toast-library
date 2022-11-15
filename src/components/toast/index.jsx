@@ -5,15 +5,17 @@ import PropTypes from 'prop-types';
 
 import { theme } from '@constants/theme';
 import { toast } from '@utils/toastService';
-import { StyledCross, StyledNotification, StyledToastContent } from './styled';
 import { setAnimation } from '@helpers/animation';
+import { StyledCross, StyledNotification, StyledToastContent } from './styled';
 
 function Toast({ message, variant, id, position, duration, animation, backgroundColor }) {
   const [closed, setClosed] = useState(false);
 
   const notificationVariant = theme.notifications[variant];
   const animationType = setAnimation(position, animation);
-  const defaultBackGroundColor = theme.notifications[variant].backgroundColor;
+  const defaultBackGroundColor = !backgroundColor
+    ? theme.notifications[variant].backgroundColor
+    : backgroundColor;
 
   const handleClose = () => {
     setClosed(true);

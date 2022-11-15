@@ -4,6 +4,9 @@ import Toaster from '@components/toaster';
 export default {
   title: 'Toasts page',
   component: Toasts,
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     variant: {
       type: 'string',
@@ -67,7 +70,7 @@ export default {
 
 export const Toasts = (args) => (
   <>
-    <Toaster {...args} />
+    <Toaster />
     <Button {...args} />
   </>
 );

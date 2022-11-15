@@ -7,23 +7,15 @@ import { toast } from '@utils/toastService';
 import ToastSlots from '@components/slots';
 import { positions } from '@constants/positions';
 import { StyledToaster } from './styled';
+import ErrorBoundary from '@containers/errorBoundary';
 
-function Toaster({ position, duration, animation, backgroundColor }) {
+function Toaster() {
   const [toasts, setToasts] = useState([]);
-
-  const obj = {
-    position: position,
-    duration: duration,
-    animation: animation,
-    backgroundColor: backgroundColor,
-    ...toasts[toasts.length - 1],
-  };
 
   const elem = document.getElementById('modal');
 
   useEffect(() => {
     toast.bindSetToasts(setToasts);
-    toast.setOptions(obj);
   }, []);
 
   const slots = positions.map((position) => {
@@ -35,35 +27,17 @@ function Toaster({ position, duration, animation, backgroundColor }) {
   });
 
   return ReactDOM.createPortal(
-    <StyledToaster>
-      {slots.map((slotsList) => {
-        if (slotsList?.length > 0) {
-          return <ToastSlots slotsList={slotsList} key={slotsList[0].position} />;
-        }
-      })}
-    </StyledToaster>,
+    <ErrorBoundary>
+      <StyledToaster>
+        {slots.map((slotsList) => {
+          if (slotsList?.length > 0) {
+            return <ToastSlots slotsList={slotsList} key={slotsList[0].position} />;
+          }
+        })}
+      </StyledToaster>
+    </ErrorBoundary>,
     elem,
   );
 }
-
-Toaster.propTypes = {
-  position: PropTypes.oneOf([
-    'top-left',
-    'top-center',
-    'top-right',
-    'bottom-left',
-    'bottom-center',
-    'bottom-right',
-  ]),
-  duration: PropTypes.string,
-  animation: PropTypes.oneOf(['smooth', 'bounce']),
-  backgroundColor: PropTypes.string,
-};
-
-Toaster.defaultProps = {
-  position: 'bottom-left',
-  duration: 3,
-  animation: 'smooth',
-};
 
 export default memo(Toaster);

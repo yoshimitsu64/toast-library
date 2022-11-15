@@ -11,22 +11,22 @@ export const theme = {
   },
   notifications: {
     success: {
-      backgroundColor: '#06d6a0',
+      backgroundColor: '#06D6A0',
       color: '#FFFFFF',
       icon: <Check2Circle size={30} />,
     },
     error: {
-      backgroundColor: '#e63946',
+      backgroundColor: '#E63946',
       color: '#FFFFFF',
       icon: <Bug size={30} />,
     },
     warning: {
-      backgroundColor: '#ffbd00',
+      backgroundColor: '#FFBD00',
       color: '#000000',
       icon: <ExclamationCircle size={30} />,
     },
     info: {
-      backgroundColor: '#7209b7',
+      backgroundColor: '#7209B7',
       color: '#FFFFFF',
       icon: <InfoCircle size={30} />,
     },

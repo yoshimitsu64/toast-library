@@ -13,10 +13,9 @@ export class ToastService {
 
   addToast(toast) {
     if (this.toasts.length < 3) {
-      const asd = { ...this.options, ...toast };
-      console.log(asd);
-      this.setToasts([...this.toasts, asd]);
-      this.toasts.push(asd);
+      const mergedOptions = { ...this.options, ...toast };
+      this.setToasts([...this.toasts, mergedOptions]);
+      this.toasts.push(mergedOptions);
     }
   }
 
@@ -28,16 +27,16 @@ export class ToastService {
     this.addToast({ message: message, variant: 'success', id: uuid(), ...options });
   }
 
-  error(message) {
-    this.addToast({ message: message, variant: 'error', id: uuid() });
+  error(message, options) {
+    this.addToast({ message: message, variant: 'error', id: uuid(), ...options });
   }
 
-  warning(message) {
-    this.addToast({ message: message, variant: 'warning', id: uuid() });
+  warning(message, options) {
+    this.addToast({ message: message, variant: 'warning', id: uuid(), ...options });
   }
 
-  info(message) {
-    this.addToast({ message: message, variant: 'info', id: uuid() });
+  info(message, options) {
+    this.addToast({ message: message, variant: 'info', id: uuid(), ...options });
   }
 
   removeToast(id) {
