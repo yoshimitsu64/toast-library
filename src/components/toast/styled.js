@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import * as smooth from '@animation/smooth';
 import * as bounce from '@animation/bounce';
 
-export const StyledNotification = styled.div`
+export const StyledToast = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Anek+Latin:wght@200&display=swap');
   font-family: 'Anek Latin', sans-serif;
   position: relative;

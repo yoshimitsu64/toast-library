@@ -44,6 +44,7 @@ export default {
     },
     backgroundColor: {
       type: 'string',
+      defaultValue: '',
       description: 'Chose toast background color',
       control: {
         type: 'color',

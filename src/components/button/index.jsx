@@ -46,7 +46,7 @@ function Button({
     }
   };
 
-  return <StyledButton onClick={handleClick}>Generate toast</StyledButton>;
+  return <StyledButton data-test="toast-gen" onClick={handleClick}>Generate toast</StyledButton>;
 }
 
 Button.propTypes = {

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { theme } from '@constants/theme';
 import { toast } from '@utils/toastService';
 import { setAnimation } from '@helpers/animation';
-import { StyledCross, StyledNotification, StyledToastContent } from './styled';
+import { StyledCross, StyledToast, StyledToastContent } from './styled';
 
 function Toast({
   message,
@@ -18,12 +18,14 @@ function Toast({
   backgroundColor,
   topic,
   horizontalMargin,
-  verticalMargin,
 }) {
   const [closed, setClosed] = useState(false);
 
   const notificationVariant = theme.notifications[variant];
+
   const animationType = setAnimation(position, animation);
+  const animationClass = animationType?.includes('smooth') ? 'smooth' : 'bounce';
+
   const defaultBackGroundColor = !backgroundColor
     ? theme.notifications[variant].backgroundColor
     : backgroundColor;
@@ -50,8 +52,10 @@ function Toast({
 
   return (
     <ThemeProvider theme={notificationVariant}>
-      <StyledNotification
+      <StyledToast
         className={closed && 'close'}
+        data-animationclass={animationClass}
+        data-test="toast"
         data-animation={animationType}
         data-topic={topic}
         onAnimationEnd={() => closed && toast.removeToast(id)}
@@ -63,8 +67,10 @@ function Toast({
           {notificationVariant.icon}
           {message}
         </StyledToastContent>
-        <StyledCross onClick={handleClose}>{theme.notifications?.closeIcon}</StyledCross>
-      </StyledNotification>
+        <StyledCross data-test="close" onClick={handleClose}>
+          {theme.notifications?.closeIcon}
+        </StyledCross>
+      </StyledToast>
     </ThemeProvider>
   );
 }

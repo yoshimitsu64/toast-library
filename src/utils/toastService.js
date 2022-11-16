@@ -21,7 +21,7 @@ export class ToastService {
         mergedOptions?.verticalMargin,
       );
       const toastOptions = { ...mergedOptions, ...margin };
-      this.setToasts([...this.toasts, toastOptions]);
+      this.setToasts && this.setToasts([...this.toasts, toastOptions]);
       this.toasts.push(toastOptions);
     }
   }
@@ -48,7 +48,15 @@ export class ToastService {
 
   removeToast(id) {
     this.toasts = this.toasts.filter((item) => item.id !== id);
-    this.setToasts([...this.toasts]);
+    this.setToasts && this.setToasts([...this.toasts]);
+  }
+
+  getLastToast() {
+    return this.toasts[this.toasts?.length - 1];
+  }
+
+  getAllToasts() {
+    return this.toasts;
   }
 
   setOptions(options) {

@@ -4,9 +4,10 @@ import { StyledSloatsContainer } from './styled';
 
 function ToastSlots({ slotsList }) {
   const containerPosition = slotsList[0].position;
-
+  console.log(slotsList[slotsList.length - 1].verticalMargin);
   return (
     <StyledSloatsContainer
+      data-test="slot"
       className={containerPosition}
       margin={slotsList[slotsList.length - 1].verticalMargin}
     >
