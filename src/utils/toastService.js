@@ -1,4 +1,5 @@
 import uuid from 'react-uuid';
+
 import { getMargin } from '../helpers/toast';
 
 export class ToastService {

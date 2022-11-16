@@ -1,6 +1,11 @@
-const injectDevServer = require("@cypress/react/plugins/react-scripts")
+const webpack = require('@cypress/webpack-preprocessor');
+module.exports = (on) => {
+  const options = {
+    // send in the options from your webpack.config.js, so it works the same
+    // as your app's code
+    webpackOptions: require('../../webpack.config'),
+    watchOptions: {},
+  };
 
-module.exports = (on, config) => {
-  injectDevServer(on, config)
-  return config
-}
+  on('file:preprocessor', webpack(options));
+};

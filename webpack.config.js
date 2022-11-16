@@ -1,26 +1,20 @@
-var path = require('path');
+const path = require('path');
 
 module.exports = {
-  mode: 'development',
+  entry: './src/index.ts',
   module: {
     rules: [
       {
-        test: /\.js$|jsx/,
-        exclude: [/node_modules/],
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env', '@babel/preset-react'],
-            },
-          },
-        ],
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
       },
     ],
   },
   resolve: {
-    alias: {
-      '~': path.resolve(__dirname, 'src'),
-    },
+    extensions: ['.tsx', '.ts', '.js', '.jsx'],
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
   },
 };
