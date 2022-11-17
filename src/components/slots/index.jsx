@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import Toast from '@components/toast/index.jsx';
 import { StyledSloatsContainer } from './styled';
 
@@ -16,5 +18,9 @@ function ToastSlots({ slotsList }) {
     </StyledSloatsContainer>
   );
 }
+
+ToastSlots.propTypes = {
+  slotsList: PropTypes.array,
+};
 
 export default ToastSlots;

@@ -15,7 +15,7 @@ function Toast({
   position,
   duration,
   animation,
-  backgroundColor="",
+  backgroundColor,
   topic,
   horizontalMargin,
 }) {
@@ -92,12 +92,14 @@ Toast.propTypes = {
   duration: PropTypes.string,
   animation: PropTypes.oneOf(['smooth', 'bounce']),
   backgroundColor: PropTypes.string,
+  topic: PropTypes.string,
 };
 
 Toast.defaultProps = {
   message: 'Toast example',
   topic: 'Toast topic',
   horizontalMargin: 0,
+  backgroundColor: '',
   verticalMargin: 0,
 };
 
