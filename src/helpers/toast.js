@@ -1,4 +1,8 @@
-export const getMargin = (positionProp, horizontalMargin = 0, verticalMargin = 0) => {
+export const getMargin = (
+  positionProp = 'bottom-left',
+  horizontalMargin = 0,
+  verticalMargin = 0,
+) => {
   const position = positionProp.split('-');
   const vertical = position[0]?.includes('top')
     ? { 'margin-top': verticalMargin }

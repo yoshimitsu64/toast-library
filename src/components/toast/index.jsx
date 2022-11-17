@@ -15,7 +15,7 @@ function Toast({
   position,
   duration,
   animation,
-  backgroundColor,
+  backgroundColor="",
   topic,
   horizontalMargin,
 }) {

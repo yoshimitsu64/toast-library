@@ -1,4 +1,4 @@
-import Toast from '@components/toast';
+import Toast from '@components/toast/index.jsx';
 import { StyledSloatsContainer } from './styled';
 
 function ToastSlots({ slotsList }) {

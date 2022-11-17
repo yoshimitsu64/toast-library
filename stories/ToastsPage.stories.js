@@ -55,7 +55,7 @@ export default {
       description: 'Chose toast duration',
       defaultValue: '3',
       control: {
-        type: 'text',
+        type: 'number',
       },
     },
     message: {

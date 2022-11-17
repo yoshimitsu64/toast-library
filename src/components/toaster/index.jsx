@@ -2,9 +2,9 @@ import React, { memo, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import { toast } from '@utils/toastService';
-import ToastSlots from '@components/slots';
+import ToastSlots from '@components/slots/index.jsx';
 import { positions } from '@constants/positions';
-import ErrorBoundary from '@containers/errorBoundary';
+import ErrorBoundary from '@containers/errorBoundary/index.jsx';
 import { StyledToaster } from './styled';
 
 function Toaster() {
@@ -23,6 +23,7 @@ function Toaster() {
       }
     });
   });
+
 
   return ReactDOM.createPortal(
     <ErrorBoundary>

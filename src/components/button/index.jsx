@@ -75,7 +75,7 @@ Button.defaultProps = {
   message: 'Toast example',
   position: 'bottom-left',
   animation: 'smooth',
-  duration: 3,
+  duration: '3',
 };
 
 export default Button;
