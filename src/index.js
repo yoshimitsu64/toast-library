@@ -3,7 +3,7 @@ export { default as Toaster } from './components/toaster/index.jsx';
 export { default as ToastSlots } from './components/slots/index.jsx';
 export { default as Toast } from './components/toast/index.jsx';
 export { toast } from './utils/toastService.js';
-export { positions } from './constants/positions.js';
+export { positions, animation, defaultOptions, numbers } from './constants/options.js';
 export { default as ErrorBoundary } from './containers/errorBoundary/index.jsx';
 export { theme } from './constants/theme.js';
 export * as smooth from './animation/smooth.js';

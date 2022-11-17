@@ -77,7 +77,7 @@ export default {
     horizontalMargin: {
       type: 'number',
       description: 'Write horizontal margin',
-      defaultValue: 0,
+      defaultValue: '0',
       control: {
         type: 'number',
       },
@@ -85,7 +85,7 @@ export default {
     verticalMargin: {
       type: 'number',
       description: 'Write vertical margin',
-      defaultValue: 0,
+      defaultValue: '0',
       control: {
         type: 'number',
       },

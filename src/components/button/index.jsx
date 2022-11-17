@@ -68,6 +68,8 @@ Button.propTypes = {
   variant: PropTypes.oneOf(['success', 'error', 'warning', 'info']),
   message: PropTypes.string,
   topic: PropTypes.string,
+  horizontalMargin: PropTypes.string,
+  verticalMargin: PropTypes.string,
 };
 
 Button.defaultProps = {

@@ -7,7 +7,7 @@ module.exports = defineConfig({
     setupNodeEvents() {},
     specPattern: 'cypress/e2e/**/*.cy.{js,ts,jsx,tsx}',
     excludeSpecPattern: ['**/__snapshots__/*', '**/__image_snapshots__/*'],
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'http://localhost:6006',
     chromeWebSecurity: false,
   },
   component: {

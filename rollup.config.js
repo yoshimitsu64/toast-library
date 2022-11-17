@@ -7,7 +7,14 @@ import path from 'path';
 export default [
   {
     input: './src/index.js',
-    external: ['react', 'react-dom', 'prop-types', 'styled-components', 'react-uuid', 'react/jsx-runtime'],
+    external: [
+      'react',
+      'react-dom',
+      'prop-types',
+      'styled-components',
+      'react-uuid',
+      'react/jsx-runtime',
+    ],
     output: [
       {
         file: 'dist/index.js',
@@ -55,6 +62,10 @@ export default [
           {
             find: '@utils',
             replacement: path.resolve(__dirname, 'src/utils'),
+          },
+          {
+            find: '@hooks',
+            replacement: path.resolve(__dirname, 'src/hooks'),
           },
         ],
       }),

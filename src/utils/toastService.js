@@ -1,7 +1,7 @@
 import uuid from 'react-uuid';
-import { animation, durations, positions } from '../constants/positions';
 
-import { getMargin } from '../helpers/toast';
+import { animation, numbers, positions, defaultOptions } from '@constants/options';
+import { getMargin } from '@helpers/toast';
 
 export class ToastService {
   constructor() {
@@ -10,52 +10,46 @@ export class ToastService {
     }
     this.setToasts = null;
     this.toasts = [];
-    this.options = null;
     ToastService.instance = this;
   }
 
-  getDefaultOptions(options) {
+  getOptions(options) {
     const defOptions = {
-      position: 'bottom-left',
-      message: 'Write your message',
-      duration: 5,
-      animation: 'smooth',
-      verticalMargin: 0,
-      horizontalMargin: 0,
-      topic: 'Toast example',
-      variant: 'info',
-      id: 1,
+      ...defaultOptions,
     };
+
     Object.keys(defOptions).forEach((key) => {
-      if (key === 'position' && positions.includes(options[key])) {
-        defOptions[key] = options[key];
-      } else if (
-        (key === 'duration' || key === 'verticalMargin' || key === 'horizontalMargin') &&
-        durations.test(options[key]) === true
-      ) {
-        defOptions[key] = options[key];
-        return;
-      } else if (key === 'animation' && animation.includes(options[key])) {
-        defOptions[key] = options[key];
-      } else {
-        if (options[key]?.length > 0) {
+      if (key in defOptions) {
+        if (key === 'position' && positions.includes(options[key])) {
           defOptions[key] = options[key];
+        } else if (
+          (key === 'duration' || key === 'verticalMargin' || key === 'horizontalMargin') &&
+          numbers.test(options[key]) === true
+        ) {
+          defOptions[key] = options[key];
+          return;
+        } else if (key === 'animation' && animation.includes(options[key])) {
+          defOptions[key] = options[key];
+        } else {
+          if (options[key]?.length > 0) {
+            defOptions[key] = options[key];
+          }
         }
       }
     });
-
+    
     return defOptions;
   }
 
   addToast(toast) {
     if (this.toasts.length < 3) {
-      const mergedOptions = { ...this.getDefaultOptions(toast) };
+      const options = { ...this.getOptions(toast) };
       const margin = getMargin(
-        mergedOptions.position,
-        mergedOptions?.horizontalMargin,
-        mergedOptions?.verticalMargin,
+        options.position,
+        options?.horizontalMargin,
+        options?.verticalMargin,
       );
-      const toastOptions = { ...mergedOptions, ...margin };
+      const toastOptions = { ...options, ...margin };
       this.setToasts && this.setToasts([...this.toasts, toastOptions]);
       this.toasts.push(toastOptions);
     }

@@ -11,6 +11,7 @@ export const StyledToast = styled.div`
   pointer-events: all;
   display: flex;
   justify-content: space-between;
+  pointer-events: all;
   align-items: center;
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: ${({ space }) => space.borders.borderRadius[0]}px;

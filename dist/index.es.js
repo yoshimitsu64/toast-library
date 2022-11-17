@@ -5,8 +5,24 @@ import { jsx, jsxs } from 'react/jsx-runtime';
 import React, { forwardRef, memo, useState, useEffect, Component } from 'react';
 import ReactDOM from 'react-dom';
 
-const getMargin = function (positionProp) {
+const positions = ['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'];
+const defaultOptions = {
+  position: 'bottom-left',
+  message: 'Write your message',
+  duration: 5,
+  animation: 'smooth',
+  verticalMargin: 0,
+  horizontalMargin: 0,
+  topic: 'Toast example',
+  variant: 'info',
+  id: 1
+};
+const numbers = /^[0-9.]+$/;
+const animation = ['smooth', 'bouce'];
+
+const getMargin = function () {
   var _position$, _position$2;
+  let positionProp = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'bottom-left';
   let horizontalMargin = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   let verticalMargin = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
   const position = positionProp.split('-');
@@ -33,18 +49,39 @@ class ToastService {
     }
     this.setToasts = null;
     this.toasts = [];
-    this.options = null;
     ToastService.instance = this;
+  }
+  getOptions(options) {
+    const defOptions = {
+      ...defaultOptions
+    };
+    Object.keys(defOptions).forEach(key => {
+      if (key in defOptions) {
+        if (key === 'position' && positions.includes(options[key])) {
+          defOptions[key] = options[key];
+        } else if ((key === 'duration' || key === 'verticalMargin' || key === 'horizontalMargin') && numbers.test(options[key]) === true) {
+          defOptions[key] = options[key];
+          return;
+        } else if (key === 'animation' && animation.includes(options[key])) {
+          defOptions[key] = options[key];
+        } else {
+          var _options$key;
+          if (((_options$key = options[key]) === null || _options$key === void 0 ? void 0 : _options$key.length) > 0) {
+            defOptions[key] = options[key];
+          }
+        }
+      }
+    });
+    return defOptions;
   }
   addToast(toast) {
     if (this.toasts.length < 3) {
-      const mergedOptions = {
-        ...this.options,
-        ...toast
+      const options = {
+        ...this.getOptions(toast)
       };
-      const margin = getMargin(mergedOptions.position, mergedOptions === null || mergedOptions === void 0 ? void 0 : mergedOptions.horizontalMargin, mergedOptions === null || mergedOptions === void 0 ? void 0 : mergedOptions.verticalMargin);
+      const margin = getMargin(options.position, options === null || options === void 0 ? void 0 : options.horizontalMargin, options === null || options === void 0 ? void 0 : options.verticalMargin);
       const toastOptions = {
-        ...mergedOptions,
+        ...options,
         ...margin
       };
       this.setToasts && this.setToasts([...this.toasts, toastOptions]);
@@ -96,9 +133,6 @@ class ToastService {
   }
   getAllToasts() {
     return this.toasts;
-  }
-  setOptions(options) {
-    this.options = options;
   }
 }
 const toast = new ToastService();
@@ -418,14 +452,16 @@ Button.propTypes = {
   backgroundColor: PropTypes.string,
   variant: PropTypes.oneOf(['success', 'error', 'warning', 'info']),
   message: PropTypes.string,
-  topic: PropTypes.string
+  topic: PropTypes.string,
+  horizontalMargin: PropTypes.string,
+  verticalMargin: PropTypes.string
 };
 Button.defaultProps = {
   topic: 'Toast topic',
   message: 'Toast example',
   position: 'bottom-left',
   animation: 'smooth',
-  duration: 3
+  duration: '3'
 };
 
 function setAnimation(position, animation) {
@@ -514,7 +550,7 @@ var bounce = /*#__PURE__*/Object.freeze({
 const StyledToast = styled.div.withConfig({
   displayName: "styled__StyledToast",
   componentId: "sc-fnopbw-0"
-})(["@import url('https://fonts.googleapis.com/css2?family=Anek+Latin:wght@200&display=swap');font-family:'Anek Latin',sans-serif;position:relative;font-weight:700;pointer-events:all;display:flex;justify-content:space-between;align-items:center;background-color:", ";border-radius:", "px;width:", "px;min-height:", "px;box-shadow:", ";padding:", "px;justify-content:space-between;color:", ";margin-top:", "px;", ";&[data-animation='left-right-smooth']{animation:0.7s ", ";}&[data-animation='right-left-smooth']{animation:0.7s ", ";}&[data-animation='up-down-smooth']{animation:0.7s ", ";}&[data-animation='down-up-smooth']{animation:0.7s ", ";}&[data-animation='left-right-bounce']{animation:0.7s ", ";}&[data-animation='right-left-bounce']{animation:0.7s ", ";}&[data-animation='up-down-bounce']{animation:0.7s ", ";}&[data-animation='down-up-bounce']{animation:0.7s ", ";}&.close{&[data-animation='left-right-smooth']{animation:0.7s ", ";}&[data-animation='right-left-smooth']{animation:0.7s ", ";}&[data-animation='up-down-smooth']{animation:0.7s ", ";}&[data-animation='down-up-smooth']{animation:0.7s ", ";}&[data-animation='left-right-bounce']{animation:0.7s ", ";}&[data-animation='right-left-bounce']{animation:0.7s ", ";}&[data-animation='up-down-bounce']{animation:0.7s ", ";}&[data-animation='down-up-bounce']{animation:0.7s ", ";}}& > :first-child{margin-right:", "px;}&::before{content:attr(data-topic);position:absolute;top:4px;}"], _ref => {
+})(["@import url('https://fonts.googleapis.com/css2?family=Anek+Latin:wght@200&display=swap');font-family:'Anek Latin',sans-serif;position:relative;font-weight:700;pointer-events:all;display:flex;justify-content:space-between;pointer-events:all;align-items:center;background-color:", ";border-radius:", "px;width:", "px;min-height:", "px;box-shadow:", ";padding:", "px;justify-content:space-between;color:", ";margin-top:", "px;", ";&[data-animation='left-right-smooth']{animation:0.7s ", ";}&[data-animation='right-left-smooth']{animation:0.7s ", ";}&[data-animation='up-down-smooth']{animation:0.7s ", ";}&[data-animation='down-up-smooth']{animation:0.7s ", ";}&[data-animation='left-right-bounce']{animation:0.7s ", ";}&[data-animation='right-left-bounce']{animation:0.7s ", ";}&[data-animation='up-down-bounce']{animation:0.7s ", ";}&[data-animation='down-up-bounce']{animation:0.7s ", ";}&.close{&[data-animation='left-right-smooth']{animation:0.7s ", ";}&[data-animation='right-left-smooth']{animation:0.7s ", ";}&[data-animation='up-down-smooth']{animation:0.7s ", ";}&[data-animation='down-up-smooth']{animation:0.7s ", ";}&[data-animation='left-right-bounce']{animation:0.7s ", ";}&[data-animation='right-left-bounce']{animation:0.7s ", ";}&[data-animation='up-down-bounce']{animation:0.7s ", ";}&[data-animation='down-up-bounce']{animation:0.7s ", ";}}& > :first-child{margin-right:", "px;}&::before{content:attr(data-topic);position:absolute;top:4px;}"], _ref => {
   let {
     backgroundColor
   } = _ref;
@@ -601,7 +637,7 @@ function Toast(_ref) {
     position,
     duration,
     animation,
-    backgroundColor,
+    backgroundColor = "",
     topic,
     horizontalMargin
   } = _ref;
@@ -695,8 +731,6 @@ function ToastSlots(_ref) {
   });
 }
 
-const positions = ['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'];
-
 class ErrorBoundary extends Component {
   constructor() {
     super();
@@ -732,12 +766,23 @@ ErrorBoundary.propTypes = {
 const StyledToaster = styled.div.withConfig({
   displayName: "styled__StyledToaster",
   componentId: "sc-1fdv5f-0"
-})(["display:flex;flex-direction:column;justify-content:flex-start;position:fixed;"]);
+})(["display:flex;flex-direction:column;justify-content:flex-start;position:fixed;pointer-events:none;"]);
+
+function usePortal() {
+  const [element] = useState(document.createElement("div"));
+  const [root] = useState(document.createElement("div"));
+  useEffect(() => {
+    document.body.append(root);
+    root.id = "portal-toasts";
+    root.appendChild(element);
+    return () => root.removeChild(element);
+  }, []);
+  return element;
+}
 
 function Toaster() {
   const [toasts, setToasts] = useState([]);
-  const elem = document.getElementById('modal');
-  
+  const element = usePortal();
   useEffect(() => {
     toast.bindSetToasts(setToasts);
   }, []);
@@ -750,7 +795,7 @@ function Toaster() {
   });
   return /*#__PURE__*/ReactDOM.createPortal( /*#__PURE__*/jsx(ErrorBoundary, {
     children: /*#__PURE__*/jsx(StyledToaster, {
-      children: slots.map((slotsList, index) => {
+      children: slots.map(slotsList => {
         if ((slotsList === null || slotsList === void 0 ? void 0 : slotsList.length) > 0) {
           return /*#__PURE__*/jsx(ToastSlots, {
             slotsList: slotsList
@@ -758,8 +803,8 @@ function Toaster() {
         }
       })
     })
-  }), elem);
+  }), element);
 }
 var index = /*#__PURE__*/memo(Toaster);
 
-export { Button, ErrorBoundary, Toast$1 as Toast, ToastSlots, index as Toaster, bounce, positions, smooth, theme, toast };
+export { Button, ErrorBoundary, Toast$1 as Toast, ToastSlots, index as Toaster, animation, bounce, defaultOptions, numbers, positions, smooth, theme, toast };

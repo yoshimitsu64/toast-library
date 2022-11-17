@@ -1,3 +1,4 @@
+import React from 'react';
 import { toast } from '../../src/utils/toastService';
 
 describe('Test toast service', () => {
