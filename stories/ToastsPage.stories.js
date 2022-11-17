@@ -52,7 +52,7 @@ export default {
     },
     duration: {
       type: 'number',
-      description: 'Chose toast duration',
+      description: 'Chose your toast duration',
       defaultValue: '3',
       control: {
         type: 'number',
@@ -60,7 +60,7 @@ export default {
     },
     message: {
       type: 'string',
-      description: 'Write toast message',
+      description: 'Write your toast message',
       defaultValue: 'Toast example',
       control: {
         type: 'text',
