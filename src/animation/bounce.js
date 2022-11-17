@@ -108,4 +108,3 @@ export const downUpHide = keyframes`
     transform: translateY(110vh);
   }
 `;
-

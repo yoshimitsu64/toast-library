@@ -1,7 +1,11 @@
-import React from 'react';
-import { toast } from '../../src/utils/toastService';
+import Toaster from '@components/toaster';
+import { toast } from '@utils/toastService';
 
 describe('Test toast service', () => {
+  beforeEach(() => {
+    cy.mount(<Toaster />);
+  });
+
   it('should add toast', () => {
     const toastOptions = {
       duration: 10,

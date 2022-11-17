@@ -12,6 +12,15 @@ module.exports = {
     ],
   },
   resolve: {
+    alias: {
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@constants': path.resolve(__dirname, 'src/constants'),
+      '@helpers': path.resolve(__dirname, 'src/helpers'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+      '@animation': path.resolve(__dirname, 'src/animation'),
+      '@containers': path.resolve(__dirname, 'src/containers'),
+      '@hooks': path.resolve(__dirname, 'src/hooks'),
+    },
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
   },
   output: {
