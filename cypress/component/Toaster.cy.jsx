@@ -14,8 +14,8 @@ describe('Test toast service', () => {
       topic: 'Success toast',
       horizontalMargin: '100px',
     };
-    toast.success('This is success toast', { ...toastOptions });
-    expect(toast.getAllToasts().length > 0);
+    toast.createToast('success', 'This is success toast', { ...toastOptions });
+    expect(toast.toasts.length > 0);
   });
 
   it('should add another toast', () => {
@@ -26,8 +26,8 @@ describe('Test toast service', () => {
       topic: 'Error toast',
       horizontalMargin: '10px',
     };
-    toast.error('This is success toast', { ...toastOptions });
-    expect(toast.getAllToasts().length > 1);
+    toast.createToast('error', 'This is error toast', { ...toastOptions });
+    expect(toast.toasts.length > 1);
   });
 
   it('should block toast if already exists 3', () => {
@@ -38,17 +38,17 @@ describe('Test toast service', () => {
       topic: 'Error toast',
       horizontalMargin: '10px',
     };
-    toast.error('This is success toast', { ...toastOptions });
-    toast.error('This is success toast', { ...toastOptions });
-    toast.error('This is success toast', { ...toastOptions });
-    toast.error('This is success toast', { ...toastOptions });
-    expect(toast.getAllToasts().length === 3);
+    toast.createToast('error', 'This is error toast', { ...toastOptions });
+    toast.createToast('error', 'This is error toast', { ...toastOptions });
+    toast.createToast('error', 'This is error toast', { ...toastOptions });
+    toast.createToast('error', 'This is error toast', { ...toastOptions });
+    expect(toast.toasts.length === 3);
   });
 
   it('Should delete two toasts', () => {
-    const toasts = toast.getAllToasts();
+    const toasts = toast.toasts;
     toast.removeToast(toasts[toasts?.length - 1].id);
     toast.removeToast(toasts[toasts?.length - 1].id);
-    expect(toasts.length < toast.getAllToasts.length);
+    expect(toasts.length < toast.toasts);
   });
 });

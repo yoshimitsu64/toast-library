@@ -1,12 +1,11 @@
 import React, { memo, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { toast } from '@utils/toastService';
 import ToastSlots from '@components/slots/index.jsx';
-import { positions } from '@constants/options';
 import ErrorBoundary from '@containers/errorBoundary/index.jsx';
-import { StyledToaster } from './styled';
+import { positions } from '@constants/positions';
 import { usePortal } from '@hooks/usePortal.jsx';
+import { StyledToaster } from './styled';
 
 function Toaster() {
   const [toasts, setToasts] = useState([]);
@@ -14,25 +13,26 @@ function Toaster() {
   const element = usePortal();
 
   useEffect(() => {
-    toast.bindSetToasts(setToasts);
+    window.setToasts = (options) => setToasts(options);
   }, []);
 
-  const slots = positions.map((position) => {
-    return [...toasts].filter((toast) => {
-      if (toast.position === position) {
-        return true;
-      }
-    });
-  });
+  const slots = positions
+    .map((position) => {
+      return [...toasts].filter((toast) => {
+        if (toast.position === position) {
+          return true;
+        }
+      });
+    })
+    .filter((slot) => slot?.length > 0);
 
   return ReactDOM.createPortal(
     <ErrorBoundary>
       <StyledToaster>
-        {slots.map((slotsList) => {
-          if (slotsList?.length > 0) {
+        {toasts?.length > 0 &&
+          slots.map((slotsList) => {
             return <ToastSlots slotsList={slotsList} key={slotsList[0].position} />;
-          }
-        })}
+          })}
       </StyledToaster>
     </ErrorBoundary>,
     element,

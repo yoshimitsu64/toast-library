@@ -1,11 +1,12 @@
 import { memo, useEffect, useState } from 'react';
 
-import { ThemeProvider } from 'styled-components';
 import PropTypes from 'prop-types';
+import { ThemeProvider } from 'styled-components';
 
 import { theme } from '@constants/theme';
 import { toast } from '@utils/toastService';
 import { setAnimation } from '@helpers/animation';
+import { toasts } from '@constants/toasts';
 import { StyledCross, StyledToast, StyledToastContent } from './styled';
 
 function Toast({
@@ -21,37 +22,32 @@ function Toast({
 }) {
   const [closed, setClosed] = useState(false);
 
-  const notificationVariant = theme.notifications[variant];
+  const toastBackgroundColor = !backgroundColor ? toasts[variant].backgroundColor : backgroundColor;
+
+  const toastStyles = {
+    ...theme,
+    ...toasts[variant],
+    horizontalMargin,
+    toastBackgroundColor,
+  };
 
   const animationType = setAnimation(position, animation);
   const animationClass = animationType?.includes('smooth') ? 'smooth' : 'bounce';
-
-  const defaultBackGroundColor = !backgroundColor
-    ? theme.notifications[variant].backgroundColor
-    : backgroundColor;
 
   const handleClose = () => {
     setClosed(true);
   };
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    const timer = setTimeout(() => {
       setClosed(true);
     }, duration * 1000);
 
-    return () => clearInterval(timer);
+    return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    if (closed) {
-      setTimeout(() => {
-        toast.removeToast(id);
-      }, 650);
-    }
-  }, [closed, id]);
-
   return (
-    <ThemeProvider theme={notificationVariant}>
+    <ThemeProvider theme={toastStyles}>
       <StyledToast
         className={closed && 'close'}
         data-animationclass={animationClass}
@@ -59,16 +55,13 @@ function Toast({
         data-animation={animationType}
         data-topic={topic}
         onAnimationEnd={() => closed && toast.removeToast(id)}
-        backgroundColor={defaultBackGroundColor}
-        horizontalMargin={horizontalMargin}
-        space={theme}
       >
         <StyledToastContent space={theme}>
-          {notificationVariant.icon}
+          {toastStyles.icon}
           {message}
         </StyledToastContent>
         <StyledCross data-test="close" onClick={handleClose}>
-          {theme.notifications?.closeIcon}
+          {toastStyles?.closeIcon}
         </StyledCross>
       </StyledToast>
     </ThemeProvider>
@@ -89,17 +82,17 @@ Toast.propTypes = {
   ]),
   horizontalMargin: PropTypes.object,
   verticalMargin: PropTypes.object,
-  duration: PropTypes.string,
+  duration: PropTypes.number,
   animation: PropTypes.oneOf(['smooth', 'bounce']),
   backgroundColor: PropTypes.string,
   topic: PropTypes.string,
 };
 
 Toast.defaultProps = {
-  message: 'Toast example',
+  duration: 3,
+  animation: 'smooth',
   topic: 'Toast topic',
   horizontalMargin: 0,
-  backgroundColor: '',
   verticalMargin: 0,
 };
 

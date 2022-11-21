@@ -2,13 +2,17 @@ import Toast from '@components/toast';
 
 export default {
   title: 'Toasts',
-  component: Toast,
+  component: ToastTemplate,
   parameters: {
     layout: 'centered',
   },
 };
 
-const ToastTemplate = (args) => <Toast {...args} />;
+const ToastTemplate = (args) => (
+  <>
+    <Toast {...args} />
+  </>
+);
 
 export const SuccessToast = ToastTemplate.bind({});
 SuccessToast.args = {

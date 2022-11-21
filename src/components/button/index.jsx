@@ -27,23 +27,7 @@ function Button({
   };
 
   const handleClick = () => {
-    switch (variant) {
-      case 'success':
-        toast.success(message, { ...options });
-        break;
-      case 'error':
-        toast.error(message, { ...options });
-        break;
-      case 'warning':
-        toast.warning(message, { ...options });
-        break;
-      case 'info':
-        toast.info(message, { ...options });
-        break;
-      default:
-        toast.info('No such option', { ...options });
-        break;
-    }
+    toast.createToast('success', 'Success toast', options);
   };
 
   return (
@@ -62,14 +46,14 @@ Button.propTypes = {
     'bottom-center',
     'bottom-right',
   ]),
-  duration: PropTypes.string,
+  duration: PropTypes.number,
   animation: PropTypes.oneOf(['smooth', 'bounce']),
   backgroundColor: PropTypes.string,
   variant: PropTypes.oneOf(['success', 'error', 'warning', 'info']),
   message: PropTypes.string,
   topic: PropTypes.string,
-  horizontalMargin: PropTypes.string,
-  verticalMargin: PropTypes.string,
+  horizontalMargin: PropTypes.number,
+  verticalMargin: PropTypes.number,
 };
 
 Button.defaultProps = {

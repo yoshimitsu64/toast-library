@@ -25,7 +25,6 @@ export const rightLeft = keyframes`
   }
   100%{
     transform: translateX(0);
-
   }
 `;
 

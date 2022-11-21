@@ -1,4 +1,4 @@
-export const getMargin = (
+export const setMargin = (
   positionProp = 'bottom-left',
   horizontalMargin = 0,
   verticalMargin = 0,
@@ -11,7 +11,7 @@ export const getMargin = (
   const horizontal = position[1]?.includes('right')
     ? { 'margin-right': horizontalMargin }
     : { 'margin-left': horizontalMargin };
-
+    
   return {
     horizontalMargin: horizontal,
     verticalMargin: vertical,
