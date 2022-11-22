@@ -11,7 +11,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "simple-import-sort"],
+  "plugins": ["react"],
   "rules": {
     "linebreak-style": ["error", "windows"],
     "quotes": ["error", "single"],
@@ -22,7 +22,6 @@
     "no-redeclare": "error",
     "no-var": "error",
     "react/react-in-jsx-scope": "off",
-    "no-use-before-define": "error",
     "camelcase": "error",
     "eqeqeq":"error",
     "prefer-const":"error"

@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { theme } from '@constants/theme';
 import { toast } from '@utils/toastService';
-import { setAnimation } from '@helpers/animation';
+import { setAnimation } from '@helpers/setAnimation';
 import { toasts } from '@constants/toasts';
 import { StyledCross, StyledToast, StyledToastContent } from './styled';
 
@@ -26,13 +26,13 @@ function Toast({
 
   const toastStyles = {
     ...theme,
+    ...toasts['defaults'],
     ...toasts[variant],
     horizontalMargin,
     toastBackgroundColor,
   };
 
   const animationType = setAnimation(position, animation);
-  const animationClass = animationType?.includes('smooth') ? 'smooth' : 'bounce';
 
   const handleClose = () => {
     setClosed(true);
@@ -46,15 +46,17 @@ function Toast({
     return () => clearTimeout(timer);
   }, []);
 
+  const handleAnimationEnd = (id) => () => closed && toast.removeToast(id);
+
   return (
     <ThemeProvider theme={toastStyles}>
       <StyledToast
         className={closed && 'close'}
-        data-animationclass={animationClass}
         data-test="toast"
-        data-animation={animationType}
+        data-animation={animation}
         data-topic={topic}
-        onAnimationEnd={() => closed && toast.removeToast(id)}
+        animationType={animationType}
+        onAnimationEnd={handleAnimationEnd(id)}
       >
         <StyledToastContent space={theme}>
           {toastStyles.icon}

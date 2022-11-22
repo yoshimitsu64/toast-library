@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 
-import * as smooth from '@animation/smooth';
-import * as bounce from '@animation/bounce';
-
 export const StyledToast = styled.div`
   position: relative;
   font-weight: 700;
@@ -21,63 +18,10 @@ export const StyledToast = styled.div`
   color: ${({ theme }) => theme.color};
   margin-top: ${({ theme }) => theme.space?.marginTop[0]}px;
   ${({ theme }) => theme.horizontalMargin};
-  &[data-animation='left-right-smooth'] {
-    animation: 0.7s ${smooth.leftRight};
-  }
-  &[data-animation='right-left-smooth'] {
-    animation: 0.7s ${smooth.rightLeft};
-  }
-  &[data-animation='up-down-smooth'] {
-    animation: 0.7s ${smooth.upDown};
-  }
-  &[data-animation='down-up-smooth'] {
-    animation: 0.7s ${smooth.downUp};
-  }
-  &[data-animation='left-right-bounce'] {
-    animation: 0.7s ${bounce.leftRight};
-  }
-  &[data-animation='right-left-bounce'] {
-    animation: 0.7s ${bounce.rightLeft};
-  }
-  &[data-animation='up-down-bounce'] {
-    animation: 0.7s ${bounce.upDown};
-  }
-  &[data-animation='down-up-bounce'] {
-    animation: 0.7s ${bounce.downUp};
-  }
+  ${({ animationType }) => animationType?.open};
   &.close {
-    &[data-animation='left-right-smooth'] {
-      animation: 0.7s ${smooth.leftRightHide};
-      animation-fill-mode: forwards;
-    }
-    &[data-animation='right-left-smooth'] {
-      animation: 0.7s ${smooth.rightLeftHide};
-      animation-fill-mode: forwards;
-    }
-    &[data-animation='up-down-smooth'] {
-      animation: 0.7s ${smooth.upDownHide};
-      animation-fill-mode: forwards;
-    }
-    &[data-animation='down-up-smooth'] {
-      animation: 0.7s ${smooth.downUpHide};
-      animation-fill-mode: forwards;
-    }
-    &[data-animation='left-right-bounce'] {
-      animation: 0.7s ${bounce.leftRightHide};
-      animation-fill-mode: forwards;
-    }
-    &[data-animation='right-left-bounce'] {
-      animation: 0.7s ${bounce.rightLeftHide};
-      animation-fill-mode: forwards;
-    }
-    &[data-animation='up-down-bounce'] {
-      animation: 0.7s ${bounce.upDownHide};
-      animation-fill-mode: forwards;
-    }
-    &[data-animation='down-up-bounce'] {
-      animation: 0.7s ${bounce.downUpHide};
-      animation-fill-mode: forwards;
-    }
+    ${({ animationType }) => animationType?.close};
+    animation-fill-mode: forwards;
   }
   & > :first-child {
     margin-right: ${({ theme }) => theme.space?.marginRight[5]}px;

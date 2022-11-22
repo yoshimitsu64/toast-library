@@ -11,7 +11,7 @@ export const setMargin = (
   const horizontal = position[1]?.includes('right')
     ? { 'margin-right': horizontalMargin }
     : { 'margin-left': horizontalMargin };
-    
+
   return {
     horizontalMargin: horizontal,
     verticalMargin: vertical,

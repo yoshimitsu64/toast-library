@@ -8,12 +8,12 @@ describe('Toasts animations', () => {
   it('should have smooth animation', () => {
     cy.get('#control-animation-0').click();
     getIframeBody().find('[data-test=toast-gen]').click();
-    getIframeBody().find('[data-animationclass=smooth]');
+    getIframeBody().find('[data-animation=smooth]');
   });
 
   it('should have bounce animation', () => {
     cy.get('#control-animation-1').click();
     getIframeBody().find('[data-test=toast-gen]').click();
-    getIframeBody().find('[data-animationclass=bounce]');
+    getIframeBody().find('[data-animation=bounce]');
   });
 });
